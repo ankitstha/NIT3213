@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.project.nit3213.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,6 +39,8 @@ class LoginViewModel @Inject constructor(
                     val errorMsg = response.errorBody()?.string() ?: response.message()
                     _loginState.value = LoginState.Error("Login failed: $errorMsg")
                 }
+            } catch (e: SocketTimeoutException) {
+                _loginState.value = LoginState.Error("Connection timeout. The server is waking up (cold start). Please try again.")
             } catch (e: Exception) {
                 _loginState.value = LoginState.Error("Network error: ${e.localizedMessage}")
             }

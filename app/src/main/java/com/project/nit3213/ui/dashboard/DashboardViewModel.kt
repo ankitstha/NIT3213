@@ -8,6 +8,7 @@ import com.project.nit3213.data.model.EntityItem
 import com.project.nit3213.data.repository.DashboardRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,6 +36,8 @@ class DashboardViewModel @Inject constructor(
                     val errorMsg = response.errorBody()?.string() ?: response.message()
                     _dashboardState.value = DashboardState.Error("Failed to load dashboard: $errorMsg")
                 }
+            } catch (e: SocketTimeoutException) {
+                _dashboardState.value = DashboardState.Error("Connection timeout. The server is waking up (cold start). Please try again.")
             } catch (e: Exception) {
                 _dashboardState.value = DashboardState.Error("Network error: ${e.localizedMessage}")
             }
