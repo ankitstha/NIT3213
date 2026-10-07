@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.nit3213.data.model.EntityItem
 import com.project.nit3213.databinding.ItemEntityBinding
 
+/**
+ * DashboardAdapter efficiently displays a list of entities using RecyclerView, ListAdapter, and DiffUtil (L6).
+ */
 class DashboardAdapter(
     private val onItemClick: (EntityItem) -> Unit
 ) : ListAdapter<EntityItem, DashboardAdapter.EntityViewHolder>(EntityDiffCallback()) {

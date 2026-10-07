@@ -10,6 +10,10 @@ import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
 import javax.inject.Inject
 
+/**
+ * LoginViewModel manages the UI state and authentication business logic for LoginActivity.
+ * Demonstrates MVVM architecture, Hilt injection, and Coroutines asynchronous networking (L4 & L5).
+ */
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val repository: AuthRepository
@@ -24,6 +28,7 @@ class LoginViewModel @Inject constructor(
             return
         }
         _loginState.value = LoginState.Loading
+        // Asynchronous network call using viewModelScope and Coroutines (L5)
         viewModelScope.launch {
             try {
                 val response = repository.login(username, password)

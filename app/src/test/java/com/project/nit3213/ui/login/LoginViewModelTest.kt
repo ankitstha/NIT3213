@@ -16,6 +16,9 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import retrofit2.Response
 
+/**
+ * Unit tests for LoginViewModel using JUnit, Mockito, and Coroutines StandardTestDispatcher (L8).
+ */
 @ExperimentalCoroutinesApi
 class LoginViewModelTest {
 
